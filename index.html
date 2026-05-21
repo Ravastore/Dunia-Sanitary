@@ -77,8 +77,15 @@
     background: rgba(255,255,255,0.92);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid transparent;
-    transition: all 0.4s;
+    transition:
+        transform 0.35s cubic-bezier(0.4,0,0.2,1),
+        background 0.3s ease,
+        box-shadow 0.3s ease;
   }
+
+  .navbar-hidden {
+  transform: translateY(-100%);
+}
   .navbar.scrolled {
     border-color: rgba(5,150,105,0.12);
     box-shadow: 0 4px 24px rgba(2,44,34,0.1);
@@ -126,13 +133,16 @@
   .nav-cta::after { display: none !important; }
   .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(5,150,105,0.5); filter: brightness(1.1); }
   .nav-cta svg { fill: #FFFFFF; }
+  .navbar.hide {
+    transform: translateY(-100%);
+}
 
   .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; border: none; background: none; }
   .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text-primary); transition: all 0.3s; }
 
   .mobile-menu {
     display: none; position: fixed; inset: 0; z-index: 999;
-    background: var(--bg-deep);
+    background: var(--emerald-light);
     flex-direction: column; align-items: center; justify-content: center; gap: 32px;
   }
   .mobile-menu.open { display: flex; }
@@ -670,7 +680,7 @@
     </div>
     <div class="nav-logo-text">
       <span class="brand">Dunia Sanitary</span>
-      <span class="sub">Premium Solutions</span>
+      <span class="sub">Specialist Sanitary</span>
     </div>
   </a>
   <ul class="nav-links">
@@ -712,7 +722,7 @@
     <h1 class="hero-title fade-in fade-in-delay-1">
       Solusi Sanitary <em>Modern</em> untuk Hunian dan Bisnis Anda
     </h1>
-    <p class="hero-subtitle fade-in fade-in-delay-2">
+    <p class="hero-subtitle fade-in fade-in-delay-2 " style="text-align: justify;">
       Dunia Sanitary menghadirkan jasa pemasangan profesional dan produk sanitary premium dengan kualitas terbaik untuk rumah, apartemen, dan proyek komersial.
     </p>
     <div class="hero-actions fade-in fade-in-delay-3">
@@ -764,7 +774,6 @@
   <div class="section-header">
     <div class="section-eyebrow fade-in"><span>Layanan Kami</span></div>
     <h2 class="section-title fade-in">Jasa Pemasangan <em>Profesional</em></h2>
-    <p class="section-sub fade-in">Dikerjakan oleh teknisi bersertifikat dengan pengalaman bertahun-tahun di industri sanitary</p>
   </div>
   <div class="services-grid">
     <div class="service-card fade-in">
@@ -810,7 +819,6 @@
   <div class="section-header">
     <div class="section-eyebrow fade-in"><span>Produk Unggulan</span></div>
     <h2 class="section-title fade-in">Koleksi <em>Premium</em> Pilihan</h2>
-    <p class="section-sub fade-in">Produk resmi dari brand terpercaya dunia, tersedia di Dunia Sanitary</p>
   </div>
   <div class="products-grid">
     <div class="product-card fade-in">
@@ -882,8 +890,7 @@
   <div class="section-header">
     <div class="section-eyebrow fade-in"><span>Galeri Proyek</span></div>
     <h2 class="section-title fade-in">Hasil <em>Pemasangan</em> Terbaik</h2>
-    <p class="section-sub fade-in">Setiap proyek kami kerjakan dengan standar tertinggi dan perhatian penuh pada detail</p>
-  </div>
+    </div>
   <div class="gallery-grid">
     <div class="gallery-item fade-in">
       <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&q=75" alt="Bathroom Project">
@@ -960,7 +967,6 @@
   <div class="section-header">
     <div class="section-eyebrow fade-in"><span>Testimoni</span></div>
     <h2 class="section-title fade-in">Yang Klien Kami <em>Katakan</em></h2>
-    <p class="section-sub fade-in">Kepercayaan pelanggan adalah prioritas utama kami</p>
   </div>
   <div class="testimonials-slider-wrap">
     <div class="testimonials-slider" id="testiSlider">
@@ -1019,7 +1025,7 @@
   <div class="footer-grid">
     <div class="footer-brand">
       <div class="brand-name">Dunia Sanitary</div>
-      <p>Solusi sanitary terlengkap untuk hunian dan bisnis Anda. Produk berkualitas, pemasangan profesional, garansi terpercaya.</p>
+      <p style="text-align: justify;">Solusi sanitary terlengkap untuk hunian dan bisnis Anda. Produk berkualitas, pemasangan profesional, garansi terpercaya.</p>
       <div class="contact-items">
         <a class="contact-item" href="https://wa.me/6282121988621" target="_blank">
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -1254,6 +1260,26 @@ _Pesan ini dikirim otomatis melalui website duniasanitary.com_`;
     document.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === n));
   }
   setInterval(() => goToSlide(0), 6000);
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    let lastScroll = 0;
+    const navbar = document.getElementById("navbar");
+
+    window.addEventListener("scroll", function () {
+
+        const currentScroll = window.scrollY;
+
+        if (currentScroll > lastScroll && currentScroll > 100) {
+            navbar.classList.add("navbar-hidden");
+        } else {
+            navbar.classList.remove("navbar-hidden");
+        }
+
+        lastScroll = currentScroll;
+    });
+
+});
 </script>
 </body>
 </html>
